@@ -17,7 +17,7 @@ const set = (url: string) => {
                 `${join(pat, `${sep}wallpaper`)}${sep}${fileName}`,
                 {
                     screen: 'main',
-                    scale: 'stretch',
+                    scale: 'fill',
                 },
             ).then(() => {
                 resolve('壁纸修改成功')
@@ -31,7 +31,7 @@ const set = (url: string) => {
                         `${join(pat, `${sep}wallpaper`)}${sep}${fileName}`,
                         {
                             screen: 'main',
-                            scale: 'stretch',
+                            scale: 'fill',
                         },
                     ).then(() => {
                         resolve('壁纸修改成功')
