@@ -9,16 +9,8 @@ const constantRoutes: RouteRecordRaw[] = [
             title: 'wallpaper',
         },
         component: Root,
-        redirect: '/home',
+        redirect: '/image',
         children: [
-            {
-                path: '/home',
-                name: 'Home',
-                meta: {
-                    title: '首页',
-                },
-                component: () => import('@/views/Home/index.vue'),
-            },
             {
                 path: '/image',
                 name: 'Image',
@@ -26,14 +18,6 @@ const constantRoutes: RouteRecordRaw[] = [
                     title: '壁纸',
                 },
                 component: () => import('@/views/Image/index.vue'),
-            },
-            {
-                path: '/likes',
-                name: 'Likes',
-                meta: {
-                    title: '收藏',
-                },
-                component: () => import('@/views/Likes/index.vue'),
             },
             {
                 path: '/upload',

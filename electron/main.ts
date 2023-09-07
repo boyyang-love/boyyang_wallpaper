@@ -18,7 +18,6 @@ const createWindow = async () => {
             nodeIntegration: true,
             preload: path.join(__dirname, './preload/index.js'), // 需要引用js文件
         },
-        // opacity: 0.9,
         transparent: true,
         titleBarStyle: 'hidden',
     })

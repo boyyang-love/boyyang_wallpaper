@@ -8,6 +8,7 @@ export declare namespace ImageApi {
         public: boolean
         sort: string // Created ThumbsUp
         keywords?: string
+        is_like?: boolean
     }
 
     export interface ImageListRes {
@@ -50,5 +51,10 @@ export declare namespace ImageApi {
         git_hub: string
         background_image: string
         motto: string
+    }
+
+    export interface LikeReq {
+        uid: number
+        likes_type: number
     }
 }

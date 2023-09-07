@@ -8,6 +8,6 @@ declare global {
         $dialog: DialogApi
         $notification: NotificationApi
         $loading: LoadingApi
-        wallpaper: Wallpaper
+        wallpaper: Wallpaper.Handler
     }
 }

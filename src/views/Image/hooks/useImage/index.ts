@@ -1,5 +1,5 @@
-import {onMounted, reactive, watch} from 'vue'
-import {imageList} from '@/api/image'
+import {reactive} from 'vue'
+import {imageList, imageLike} from '@/api/image'
 import {ImageApi} from '@/api/image/types'
 import {env} from '@/utils/env'
 import {type IconsItem} from '@/views/Image/components/imageCard/icons.ts'
@@ -15,9 +15,10 @@ const imageData = reactive({
     list: [] as (ImageApi.Exhibitions & { isSpin: boolean, isLike: boolean })[],
     starIds: [] as number[],
     isSpin: false,
+    isLike: false,
 })
 
-const useImage = (isInit = true) => {
+const useImage = () => {
 
     const pageSizes = [
         {
@@ -65,16 +66,6 @@ const useImage = (isInit = true) => {
         },
     ]
 
-    watch(() => imageData.sort, () => {
-        getList()
-    })
-
-    onMounted(() => {
-        if (isInit) {
-            getList()
-        }
-    })
-
     const getList = (isReset = false) => {
         if (isReset) {
             imageData.page = 1
@@ -82,12 +73,13 @@ const useImage = (isInit = true) => {
         }
         window.$loading.loadingStart()
         let params = {
-            page:  imageData.page,
-            limit:  imageData.limit,
+            page: imageData.page,
+            limit: imageData.limit,
             type: imageData.type,
             public: imageData.public,
             sort: imageData.sort,
             keywords: imageData.keywords,
+            is_like: imageData.isLike,
         }
 
         imageList(params).then((res) => {
@@ -106,14 +98,17 @@ const useImage = (isInit = true) => {
         })
     }
 
-    const iconClick = (item: IconsItem & { url: string }, citem: ImageApi.Exhibitions & { isSpin: boolean }) => {
+    const iconClick = (
+        item: IconsItem & { url: string },
+        citem: ImageApi.Exhibitions & { isSpin: boolean, isLike: boolean },
+    ) => {
         if (item.name === 'wallpaper') {
             citem.isSpin = true
             window.wallpaper.set(item.url).then((msg: string) => {
-                window.$message.success(msg)
+                window.wallpaper.message({title: '提示', msg})
                 citem.isSpin = false
             }).catch((err: string) => {
-                window.$message.error(err)
+                window.wallpaper.message({title: '错误', msg: err})
                 citem.isSpin = false
             })
         }
@@ -121,11 +116,20 @@ const useImage = (isInit = true) => {
         if (item.name === 'download') {
             citem.isSpin = true
             window.wallpaper.customDownload(item.url).then((msg: string) => {
-                window.$message.success(msg)
+                window.wallpaper.message({title: '提示', msg})
                 citem.isSpin = false
             }).catch((err) => {
-                console.log(err)
-                window.$message.error(err.toString())
+                window.wallpaper.message({title: '错误', msg: err.toString()})
+                citem.isSpin = false
+            })
+        }
+
+        if (item.name === 'star') {
+            citem.isSpin = true
+            imageLike({uid: citem.uid, likes_type: !citem.isLike ? 1 : 0}).then(() => {
+                citem.isLike = !citem.isLike
+                citem.isSpin = false
+            }).catch(() => {
                 citem.isSpin = false
             })
         }

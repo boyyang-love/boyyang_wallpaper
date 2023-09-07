@@ -9,7 +9,21 @@ export const imageList = (params: ImageApi.ImageListReq) => {
             params,
         },
         {
-            isShowSuccessMessage: false,
+            isShowMessage: false,
+        },
+    )
+}
+
+export const imageLike = (params: ImageApi.LikeReq) => {
+    return http.request(
+        {
+            url: '/like',
+            method: 'POST',
+            data: {
+                uid: params.uid,
+                likes_type: params.likes_type,
+                type: 1,
+            },
         },
     )
 }

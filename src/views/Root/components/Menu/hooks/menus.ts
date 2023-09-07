@@ -1,5 +1,5 @@
 import type {Component} from 'vue'
-import {Home, Image, HeartHalf} from '@vicons/ionicons5'
+import { Image, HeartHalf} from '@vicons/ionicons5'
 
 export interface MenuItem {
     id: number
@@ -8,21 +8,12 @@ export interface MenuItem {
     color: string
     size: number
     position: string
-    path: string
+    path: string,
 }
 
 const useMenus = () => {
     const size = 24
     const menus: Array<MenuItem> = [
-        {
-            id: 0,
-            name: '首页',
-            icon: Home,
-            color: '#fff',
-            size,
-            position: 'top',
-            path: '/',
-        },
         {
             id: 1,
             name: '壁纸',
@@ -39,7 +30,7 @@ const useMenus = () => {
             color: '#fff',
             size,
             position: 'top',
-            path: '/likes',
+            path: '/image',
         },
     ]
 

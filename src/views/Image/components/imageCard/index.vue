@@ -2,6 +2,7 @@
 import {icons, type IconsItem} from './icons'
 
 interface Props {
+  uid: number
   url: string
   star: number
   isLike: boolean

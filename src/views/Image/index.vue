@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {watch, onMounted} from 'vue'
 import ImageCard from './components/imageCard/index.vue'
 import {useImage} from './hooks/useImage'
 
@@ -9,7 +10,17 @@ const {
   iconClick,
   pageChange,
   pageSizeChange,
+  getList,
 } = useImage()
+
+
+onMounted(() => {
+  getList()
+})
+
+watch(() => imageData.sort, () => {
+  getList()
+})
 
 </script>
 
@@ -20,6 +31,7 @@ const {
         v-for="item in imageData.list"
     >
       <ImageCard
+          :uid="item.uid"
           :url="item.cover"
           :star="item.thumbs_up"
           :is-like="item.isLike"
@@ -70,8 +82,8 @@ const {
 
   .pagination {
     position: fixed;
-    background-color: rgba(17, 17, 17, 0.9);
-    backdrop-filter: saturate(120%) blur(45px);
+    background-color: rgba(34, 40, 49, 1);
+    backdrop-filter: saturate(120%) blur(100px);
     padding: 10px 0;
     bottom: 0;
     box-sizing: border-box;

@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import {computed, ref} from 'vue'
-import {useRouter} from 'vue-router'
+import {computed, ref, watch} from 'vue'
 import {useMenus, type MenuItem} from './hooks/menus'
 import {useUserStore} from '@/store/modules/user'
 import {Search} from '@vicons/ionicons5'
 import {env} from '@/utils/env'
 import {useImage} from '@/views/Image/hooks/useImage'
 
-const {imageData, getList} = useImage(false)
+const {imageData, getList} = useImage()
 
 const {menus} = useMenus()
-const router = useRouter()
-const active = ref<number>(0)
+const active = ref<number>(1)
 
 const userStore = useUserStore()
 
 const iconClick = (e: MenuItem) => {
   active.value = e.id
-  router.push(
-      {
-        path: e.path,
-      },
-  )
+  imageData.isLike = e.id === 2
+  imageData.page = 1
+  imageData.limit = 10
 }
 
 const userAvatar = computed(() => {
   return `${env.VITE_APP_IMG_URL}/${userStore.info.avatar_url}`
+})
+
+watch(() => imageData.isLike, () => {
+  getList()
 })
 
 </script>
@@ -86,7 +86,8 @@ const userAvatar = computed(() => {
   justify-content: center;
   align-items: center;
   -webkit-app-region: drag;
-  z-index: 99;
+  background-color: rgba(34, 40, 49, 0.5);
+  backdrop-filter: saturate(120%) blur(100px);
 
   .inner-wrapper {
     box-sizing: border-box;

@@ -9,5 +9,8 @@ export const login = (req: LoginApi.LoginReq) => {
             method: 'POST',
             data: req,
         },
+        {
+            isShowMessage: false,
+        },
     )
 }

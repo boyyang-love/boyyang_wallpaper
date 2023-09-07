@@ -17,10 +17,10 @@ import Menu from './components/Menu/index.vue'
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: rgba(34, 40, 49, 0.5);
-  backdrop-filter: saturate(120%) blur(100px);
   display: flex;
   flex-direction: column;
+  background-color: rgba(34, 40, 49, 0.5);
+  backdrop-filter: saturate(120%) blur(100px);
 
   .root-router-view {
     box-sizing: border-box;

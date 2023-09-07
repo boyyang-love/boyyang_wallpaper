@@ -24,11 +24,8 @@ const useLogin = () => {
         login(params).then((res) => {
             userStore.setToken(res.data.token)
             userStore.setInfo(res.data.info)
-            router.replace({path: '/home'}).then(() => {
-                window.$notification.create({
-                    title: '提示',
-                    content: '登录成功',
-                })
+            router.replace({path: '/image'}).then(() => {
+                window.wallpaper.message({title: '提示', msg: '登录成功'})
             })
         })
     }
