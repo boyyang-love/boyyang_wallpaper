@@ -2,6 +2,7 @@ import {app, BrowserWindow, ipcMain} from 'electron'
 import WinState from 'electron-win-state'
 import * as path from 'path'
 import {handleInit} from './preload/handle'
+import {createTray} from './tray'
 
 const createWindow = async () => {
     const winState = new WinState({
@@ -40,6 +41,8 @@ const createWindow = async () => {
 
 app.whenReady().then(async () => {
     await createWindow()
+    createTray()
 })
+
 
 

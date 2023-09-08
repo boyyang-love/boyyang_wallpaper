@@ -1,4 +1,5 @@
 import type {AxiosRequestConfig, AxiosResponse} from 'axios'
+import {AxiosError} from 'axios'
 
 export interface Result<T = any> {
     code: number
@@ -30,8 +31,6 @@ export interface RequestOptions {
     token?: string
     // 是否有返回信息
     isReturn?: boolean
-    // 是否控制台打印Json
-    isConsoleJson?: boolean
 }
 
 export abstract class TransForm {
@@ -49,7 +48,7 @@ export abstract class TransForm {
     /**
      * @description: 请求失败处理
      */
-    requestCatch?: (e: any, options: RequestOptions) => Promise<any>
+    requestCatch?: (e: AxiosError, options: RequestOptions) => any
 
     /**
      * @description: 请求之前的拦截器

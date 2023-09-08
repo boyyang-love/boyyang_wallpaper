@@ -1,11 +1,11 @@
 import {useUserStoreWithOut} from '@/store/modules/user'
 
-const token = (): string => {
-    const userStore = useUserStoreWithOut()
+const userStore = useUserStoreWithOut()
 
+const token = (): string => {
     return userStore.token
 }
 
 export {
-    token,
+    token
 }

@@ -1,7 +1,8 @@
 import {Result, TransForm} from './types'
-import {AxiosResponse} from 'axios'
+import {AxiosError, AxiosResponse} from 'axios'
 import qs from 'qs'
 import {useUserStore} from '@/store/modules/user'
+import {router} from '@/router'
 
 const transForm: TransForm = {
     beforeRequestHook(config, opt) {
@@ -44,7 +45,6 @@ const transForm: TransForm = {
             isShowSuccessMessage,
             isShowErrorMessage,
             isReturn,
-            isConsoleJson,
         } = opt
 
         const {code, msg} = res.data
@@ -63,18 +63,27 @@ const transForm: TransForm = {
             return {data: {code: 0, msg: ''}}
         }
 
-        if (isConsoleJson) {
-            console.log(res, JSON.stringify(res.data.data))
-        }
-
 
         return res
     },
 
     responseInterceptors(res: AxiosResponse<Result, any>): AxiosResponse<Result, any> {
-
-        console.log(res)
         return res
+    },
+
+    requestCatch(e: AxiosError) {
+        if (e?.response?.status === 401) {
+            window.$notification.error({
+                title: '提示',
+                content: 'token 过期即将重新登录',
+                duration: 2000,
+            })
+
+            window.sessionStorage.clear()
+            router.replace({name: 'Login'}).then(() => {
+            })
+        }
+
     },
 }
 

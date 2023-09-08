@@ -27,8 +27,6 @@ const createHttp = () => {
                 token: '',
                 // 是否有返回
                 isReturn: true,
-                // 是否控制台打印json
-                isConsoleJson: false,
 
             },
             transform: transForm,

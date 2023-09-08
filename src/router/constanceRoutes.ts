@@ -45,6 +45,14 @@ const constantRoutes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/Login/index.vue'),
     },
+    {
+        path: '/tray',
+        name: 'Tray',
+        meta: {
+            title: '系统托盘',
+        },
+        component: () => import('@/views/Tray/index.vue'),
+    },
 ]
 
 export {constantRoutes}

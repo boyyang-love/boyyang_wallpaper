@@ -6,18 +6,22 @@ const createRouterGuards = (router: Router) => {
     router.beforeEach(async (to, _, next) => {
         document.title = to.meta.title as string
         const userStore = useUserStoreWithOut()
-        if(to.path === '/login'){
+        if (to.path === '/login') {
             next()
             return
         }
-        if(userStore.token){
-            if(to.path === '/login'){
-                next({path: '/home'})
-            }else {
+        if (userStore.token) {
+            if (to.path === '/login') {
+                next({path: '/image'})
+            } else {
                 next()
             }
-        }else {
-            next({path: '/login'})
+        } else {
+            if (to.path === '/tray') {
+                next()
+            } else {
+                next({path: '/login'})
+            }
             return
         }
         next()

@@ -23,7 +23,7 @@ const useUserStore = defineStore(
 
         persist: {
             key: 'app-user',
-            storage: window.sessionStorage,
+            storage: window.localStorage,
             paths: ['token', 'info'],
         },
     },
