@@ -3,7 +3,8 @@
  */
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "YourAppID",
+  "productName": "boyyang.paper",
+  "appId": "com.boyyang-paper.app",
   "asar": true,
   "directories": {
     "output": "release/${version}"
@@ -17,6 +18,23 @@
     "target": [
       "dmg"
     ]
+  },
+  "dmg": {
+    contents: [
+      {
+        // 这个是右边图标及内容
+        x: 410,
+        y: 190,
+        type: 'link',
+        path: '/Applications'
+      },
+      {
+        // 这个是你左边的图标
+        x: 130,
+        y: 190,
+        type: 'file'
+      }
+    ],
   },
   "win": {
     "target": [

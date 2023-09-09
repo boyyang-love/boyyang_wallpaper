@@ -1,4 +1,4 @@
-import {app, Tray, nativeImage, BrowserWindow} from 'electron'
+import {app, Tray, nativeImage, BrowserWindow, Menu} from 'electron'
 import {join} from 'path'
 
 const createTray = () => {
@@ -10,22 +10,36 @@ const createTray = () => {
 
     tray.on('click', (_, bounds) => {
         if (!isCreate) {
-            createTrayWin(bounds).then(w => {
-                win = w
-                app.whenReady().then(() => {
-                    win?.show()
-                    isCreate = true
+            if (win) {
+                win.setPosition(bounds.x, 0, true)
+                win.show()
+                isCreate = true
+            } else {
+                createTrayWin(bounds).then(w => {
+                    win = w
+                    app.whenReady().then(() => {
+                        win?.show()
+                        isCreate = true
+                    })
                 })
-
-                win.on('blur', () => {
-                    win?.hide()
-                    isCreate = false
-                })
-            })
+            }
         } else {
-            win?.close()
+            win?.hide()
             isCreate = false
         }
+    })
+
+    tray.on('double-click', () => {
+        const contextMenu = Menu.buildFromTemplate([
+            {
+                label: '退出',
+                type: 'normal',
+                click: () => {
+                    app.quit()
+                },
+            },
+        ])
+        tray.setContextMenu(contextMenu)
     })
 }
 
@@ -37,19 +51,21 @@ const createTrayWin = async (bounds: Electron.Rectangle) => {
         show: false,
         width: width,
         height: height,
-        x: bounds.x - (width / 2 - bounds.width / 2),
-        y: bounds.height,
+        x: bounds.x,
+        y: 0,
         frame: false,
         autoHideMenuBar: true,
         disableAutoHideCursor: true,
         transparent: true,
-        // opacity: 0.5,
         resizable: false,
+        type: 'panel',
     })
 
     win.setVisibleOnAllWorkspaces(true)
     win.setAlwaysOnTop(true, 'pop-up-menu')
     win.setSkipTaskbar(false)
+
+
 
     if (app.isPackaged) {
         await win.loadURL(`file://${join(__dirname, '../dist/index.html#/tray')}`)

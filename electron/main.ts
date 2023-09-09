@@ -21,7 +21,12 @@ const createWindow = async () => {
         },
         transparent: true,
         titleBarStyle: 'hidden',
+        icon: path.join(__dirname, './images/app.png'),
     })
+
+    if (process.platform === 'darwin') {
+        app.dock.setIcon(path.join(__dirname, './images/app.png'))
+    }
 
     if (app.isPackaged) {
         await win.loadFile('./dist/index.html')
