@@ -27,3 +27,17 @@ export const imageLike = (params: ImageApi.LikeReq) => {
         },
     )
 }
+
+export const trayImages = (params?: ImageApi.TrayReq) => {
+    return http.request<ImageApi.TrayRes>(
+        {
+            url: '/tray',
+            method: 'get',
+            params,
+        },
+        {
+            isShowMessage: false,
+            withToken: false,
+        },
+    )
+}

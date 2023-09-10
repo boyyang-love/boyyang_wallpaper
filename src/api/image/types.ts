@@ -57,4 +57,18 @@ export declare namespace ImageApi {
         uid: number
         likes_type: number
     }
+
+    export interface TrayReq {
+        page?: number
+        limit?: number
+    }
+
+    export interface TrayRes {
+        exhibitions: TaryExhibitions[]
+    }
+
+    export interface TaryExhibitions {
+        uid: number
+        cover: string
+    }
 }

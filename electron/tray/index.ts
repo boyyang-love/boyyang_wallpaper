@@ -2,7 +2,7 @@ import {app, Tray, nativeImage, BrowserWindow, Menu} from 'electron'
 import {join} from 'path'
 
 const createTray = () => {
-    const icon = nativeImage.createFromPath(join(__dirname, './images/iconTemplate.png'))
+    const icon = nativeImage.createFromPath(join(__dirname, './icons/iconTemplate.png'))
     const tray = new Tray(icon)
 
     let isCreate = false
@@ -11,7 +11,7 @@ const createTray = () => {
     tray.on('click', (_, bounds) => {
         if (!isCreate) {
             if (win) {
-                win.setPosition(bounds.x, 0, true)
+                win.setPosition(bounds.x - (150 - bounds.width / 2), 0, true)
                 win.show()
                 isCreate = true
             } else {
@@ -29,10 +29,10 @@ const createTray = () => {
         }
     })
 
-    tray.on('double-click', () => {
+    tray.on('right-click', () => {
         const contextMenu = Menu.buildFromTemplate([
             {
-                label: '退出',
+                label: '退出应用',
                 type: 'normal',
                 click: () => {
                     app.quit()
@@ -45,13 +45,13 @@ const createTray = () => {
 
 
 const createTrayWin = async (bounds: Electron.Rectangle) => {
-    let width = 300
-    let height = 355
+    let width = 350
+    let height = 455
     const win = new BrowserWindow({
         show: false,
         width: width,
         height: height,
-        x: bounds.x,
+        x: bounds.x - width / 2,
         y: 0,
         frame: false,
         autoHideMenuBar: true,
@@ -59,13 +59,15 @@ const createTrayWin = async (bounds: Electron.Rectangle) => {
         transparent: true,
         resizable: false,
         type: 'panel',
+        webPreferences: {
+            nodeIntegration: true,
+            preload: join(__dirname, './preload/index.js'), // 需要引用js文件
+        },
     })
 
     win.setVisibleOnAllWorkspaces(true)
     win.setAlwaysOnTop(true, 'pop-up-menu')
     win.setSkipTaskbar(false)
-
-
 
     if (app.isPackaged) {
         await win.loadURL(`file://${join(__dirname, '../dist/index.html#/tray')}`)

@@ -3,10 +3,12 @@ export namespace Wallpaper {
         title: string
         msg: string
     }
+
     export interface Handler {
         set: (url: string) => Promise<any>
         download: (url: string) => Promise<any>
         customDownload: (url: string) => Promise<any>
         message: (content: MessageContent) => Promise<any>
+        exit: () => Promise<any>
     }
 }

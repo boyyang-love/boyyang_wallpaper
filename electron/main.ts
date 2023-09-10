@@ -13,19 +13,19 @@ const createWindow = async () => {
     const win = new BrowserWindow({
         show: false,
         ...winState.winOptions,
-        minWidth: 500,
-        minHeight: 450,
+        minWidth: 550,
+        minHeight: 750,
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, './preload/index.js'), // 需要引用js文件
         },
         transparent: true,
         titleBarStyle: 'hidden',
-        icon: path.join(__dirname, './images/app.png'),
+        icon: path.join(__dirname, './icons/app.png'),
     })
 
     if (process.platform === 'darwin') {
-        app.dock.setIcon(path.join(__dirname, './images/app.png'))
+        app.dock.setIcon(path.join(__dirname, './icons/app.png'))
     }
 
     if (app.isPackaged) {

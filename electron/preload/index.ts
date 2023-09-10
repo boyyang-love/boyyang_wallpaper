@@ -14,5 +14,6 @@ contextBridge.exposeInMainWorld('wallpaper', <Wallpaper.Handler>{
     download: (url: string) => electron.ipcRenderer.invoke('download', url),
     customDownload: (url: string) => electron.ipcRenderer.invoke('customDownload', url),
     message: (msg: { title: string, msg: string }) => electron.ipcRenderer.invoke('message', msg),
+    exit: () => electron.ipcRenderer.invoke('exit'),
 })
 

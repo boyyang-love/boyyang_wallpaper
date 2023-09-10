@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build && electron-builder",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:generate-icons": "electron-icon-builder --input=./electron/icons/app.png --output=./electron --flatten"
   },
   "dependencies": {
     "@types/download": "^8.0.2",
@@ -14,6 +15,7 @@
     "@vicons/ionicons5": "^0.12.0",
     "axios": "^1.5.0",
     "download": "^8.0.0",
+    "electron-icon-builder": "^2.0.1",
     "electron-win-state": "^1.1.22",
     "less": "^4.2.0",
     "naive-ui": "^2.34.4",
