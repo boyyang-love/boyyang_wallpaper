@@ -64,6 +64,7 @@ export declare namespace ImageApi {
     }
 
     export interface TrayRes {
+        count: number
         exhibitions: TaryExhibitions[]
     }
 

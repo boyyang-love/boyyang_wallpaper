@@ -6,6 +6,7 @@ import {env} from '@/utils/env'
 
 const useTray = () => {
     const images = ref<(ImageApi.TaryExhibitions & { isLoading: boolean })[]>([])
+    const count = ref<number>(0)
     const isLoading = ref<boolean>(false)
     onMounted(() => {
         getImages()
@@ -24,6 +25,7 @@ const useTray = () => {
                 }
             })
             isLoading.value = false
+            count.value = res.data.count
             if (isReload) {
                 window.$message.success('刷新成功')
             }
@@ -60,6 +62,7 @@ const useTray = () => {
         getImages(true)
     }
     return {
+        count,
         images,
         isLoading,
         setWallpaper,

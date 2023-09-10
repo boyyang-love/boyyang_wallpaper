@@ -2,7 +2,7 @@
 import {PulseSharp, ExitSharp, ReloadSharp} from '@vicons/ionicons5'
 import {useTray} from './hooks/useTray'
 
-const {images, isLoading, setWallpaper, exit, reload} = useTray()
+const {count, images, isLoading, setWallpaper, exit, reload} = useTray()
 
 </script>
 
@@ -18,6 +18,7 @@ const {images, isLoading, setWallpaper, exit, reload} = useTray()
           </template>
           退出应用
         </n-tooltip>
+        <span class="count">共{{ count }}张壁纸</span>
         <n-tooltip trigger="hover">
           <template #trigger>
             <n-icon :size="20" class="icon" @click="reload">
@@ -50,6 +51,9 @@ const {images, isLoading, setWallpaper, exit, reload} = useTray()
             </n-image>
           </n-spin>
         </div>
+        <div class="bottom">
+          到底了
+        </div>
       </div>
     </div>
   </n-spin>
@@ -61,7 +65,7 @@ const {images, isLoading, setWallpaper, exit, reload} = useTray()
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  padding: 15px 0;
+  padding: 15px 0 0;
   background-color: rgba(17, 17, 17, 0.4);
   position: relative;
 
@@ -77,6 +81,10 @@ const {images, isLoading, setWallpaper, exit, reload} = useTray()
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .count {
+      color: whitesmoke;
+    }
 
     .icon {
       cursor: pointer;
@@ -113,8 +121,11 @@ const {images, isLoading, setWallpaper, exit, reload} = useTray()
         align-items: center;
       }
     }
+
+    .bottom {
+      color: whitesmoke;
+      margin: 5px 0;
+    }
   }
-
-
 }
 </style>
