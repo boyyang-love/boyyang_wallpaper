@@ -54,12 +54,16 @@ const useTray = () => {
             negativeText: '算了',
             onPositiveClick: () => {
                 window.wallpaper.exit().then()
-            }
+            },
         })
     }
 
     const reload = () => {
         getImages(true)
+    }
+
+    const toHome = () => {
+        window.wallpaper.toHome().then()
     }
     return {
         count,
@@ -68,6 +72,7 @@ const useTray = () => {
         setWallpaper,
         exit,
         reload,
+        toHome,
     }
 }
 

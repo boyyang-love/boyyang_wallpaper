@@ -1,4 +1,4 @@
-import {set, download, customDownload, message, exit} from './modules'
+import {set, download, customDownload, message, exit, toHome} from './modules'
 import {BrowserWindow} from 'electron'
 import type {Wallpaper} from '../preload-env'
 
@@ -8,6 +8,7 @@ const handleInit = (ipcMain: Electron.IpcMain, win: BrowserWindow) => {
     ipcMain.handle('customDownload', (_, url: string) => customDownload(url, win))
     ipcMain.handle('message', (_, messageContent: Wallpaper.MessageContent) => message(messageContent))
     ipcMain.handle('exit', () => exit())
+    ipcMain.handle('toHome', () => toHome(win))
 }
 
 export {

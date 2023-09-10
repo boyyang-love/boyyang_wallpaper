@@ -7,6 +7,9 @@ const createTray = () => {
 
     let isCreate = false
     let win: null | BrowserWindow = null
+    createTrayWin(tray.getBounds()).then((w) => {
+        win = w
+    })
 
     tray.on('click', (_, bounds) => {
         if (!isCreate) {

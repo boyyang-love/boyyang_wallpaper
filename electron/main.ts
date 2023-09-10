@@ -40,6 +40,13 @@ const createWindow = async () => {
         win.show()
     })
 
+
+    win.on('close', (event) => {
+        win.hide()
+        app.dock.hide()
+        event.preventDefault()
+    })
+
     handleInit(ipcMain, win)
 }
 

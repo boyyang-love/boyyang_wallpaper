@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {PulseSharp, ExitSharp, ReloadSharp} from '@vicons/ionicons5'
+import {PulseSharp, ExitSharp, ReloadCircleSharp, PaperPlaneSharp} from '@vicons/ionicons5'
 import {useTray} from './hooks/useTray'
 
-const {count, images, isLoading, setWallpaper, exit, reload} = useTray()
+const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
 
 </script>
 
@@ -10,23 +10,34 @@ const {count, images, isLoading, setWallpaper, exit, reload} = useTray()
   <n-spin :show="isLoading">
     <div class="tray-wrapper">
       <div class="tray-setting">
-        <n-tooltip trigger="hover">
-          <template #trigger>
-            <n-icon :size="20" class="icon" @click="exit">
-              <ExitSharp></ExitSharp>
-            </n-icon>
-          </template>
-          退出应用
-        </n-tooltip>
+        <n-space align="center">
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-icon :size="18" class="icon" @click="toHome">
+                <PaperPlaneSharp></PaperPlaneSharp>
+              </n-icon>
+            </template>
+            首页
+          </n-tooltip>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-icon :size="18" class="icon" @click="reload">
+                <ReloadCircleSharp></ReloadCircleSharp>
+              </n-icon>
+            </template>
+            刷新页面
+          </n-tooltip>
+          <n-tooltip trigger="hover">
+            <template #trigger>
+              <n-icon :size="18" class="icon" @click="exit">
+                <ExitSharp></ExitSharp>
+              </n-icon>
+            </template>
+            退出应用
+          </n-tooltip>
+        </n-space>
+
         <span class="count">共{{ count }}张壁纸</span>
-        <n-tooltip trigger="hover">
-          <template #trigger>
-            <n-icon :size="20" class="icon" @click="reload">
-              <ReloadSharp></ReloadSharp>
-            </n-icon>
-          </template>
-          刷新页面
-        </n-tooltip>
       </div>
       <div class="images">
         <div v-for="item in images">

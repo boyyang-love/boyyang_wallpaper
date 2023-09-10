@@ -10,5 +10,6 @@ export namespace Wallpaper {
         customDownload: (url: string) => Promise<any>
         message: (content: MessageContent) => Promise<any>
         exit: () => Promise<any>
+        toHome: () => Promise<any>
     }
 }
