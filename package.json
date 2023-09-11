@@ -1,7 +1,9 @@
 {
   "name": "boyyang-wallpaper",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "author": "boyyang",
+  "description": "boyyang.wallpaper",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build && electron-builder",
