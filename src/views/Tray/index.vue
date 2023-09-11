@@ -10,7 +10,7 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
   <n-spin :show="isLoading">
     <div class="tray-wrapper">
       <div class="tray-setting">
-        <n-space align="center">
+        <n-space justify="center">
           <n-tooltip trigger="hover">
             <template #trigger>
               <n-icon :size="18" class="icon" @click="toHome">
@@ -75,18 +75,17 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
 .tray-wrapper {
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
-  padding: 15px 0 0;
-  background-color: rgba(17, 17, 17, 0.4);
+  height: 440px;
   position: relative;
+  overflow-y: auto;
 
   .tray-setting {
     box-sizing: border-box;
     width: 100%;
     height: 35px;
     position: fixed;
-    padding: 0 15px;
-    top: 0;
+    padding: 10px 15px;
+    //top: 0;
     background-color: #393e46;
     z-index: 1;
     display: flex;
@@ -108,13 +107,13 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
   }
 
   .images {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
     cursor: pointer;
-    padding-top: 20px;
+    padding: 35px 0;
 
     .img {
       box-sizing: border-box;
