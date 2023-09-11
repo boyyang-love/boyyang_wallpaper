@@ -1,49 +1,46 @@
-import {app, Tray, nativeImage, BrowserWindow, Menu} from 'electron'
+import {app, Tray, nativeImage, BrowserWindow} from 'electron'
 import {join} from 'path'
 
 const createTray = () => {
     const icon = nativeImage.createFromPath(join(__dirname, './icons/iconTemplate.png'))
     const tray = new Tray(icon)
 
-    let isCreate = false
+    let isShow = false
     let win: null | BrowserWindow = null
-    createTrayWin(tray.getBounds()).then((w) => {
-        win = w
-    })
 
     tray.on('click', (_, bounds) => {
-        if (!isCreate) {
+        if (!isShow) {
             if (win) {
                 win.setPosition(bounds.x - (150 - bounds.width / 2), 0, true)
                 win.show()
-                isCreate = true
+                isShow = true
             } else {
                 createTrayWin(bounds).then(w => {
                     win = w
                     app.whenReady().then(() => {
                         win?.show()
-                        isCreate = true
+                        isShow = true
                     })
                 })
             }
         } else {
             win?.hide()
-            isCreate = false
+            isShow = false
         }
     })
 
-    tray.on('right-click', () => {
-        const contextMenu = Menu.buildFromTemplate([
-            {
-                label: '退出应用',
-                type: 'normal',
-                click: () => {
-                    app.quit()
-                },
-            },
-        ])
-        tray.setContextMenu(contextMenu)
-    })
+    // tray.on('right-click', () => {
+    //     const contextMenu = Menu.buildFromTemplate([
+    //         {
+    //             label: '退出应用',
+    //             type: 'normal',
+    //             click: () => {
+    //                 app.quit()
+    //             },
+    //         },
+    //     ])
+    //     tray.setContextMenu(contextMenu)
+    // })
 }
 
 

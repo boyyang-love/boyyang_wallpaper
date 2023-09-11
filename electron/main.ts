@@ -40,11 +40,18 @@ const createWindow = async () => {
         win.show()
     })
 
-
     win.on('close', (event) => {
         win.hide()
         app.dock.hide()
         event.preventDefault()
+    })
+
+    app.on('activate', async () => {
+        if (win) {
+            app.dock.show().then(() => {
+                win?.show()
+            })
+        }
     })
 
     handleInit(ipcMain, win)
@@ -55,6 +62,11 @@ app.whenReady().then(async () => {
     await createWindow()
     createTray()
 })
+
+app.on('window-all-closed', () => {
+    app.quit()
+})
+
 
 
 
