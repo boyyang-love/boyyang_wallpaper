@@ -31,6 +31,7 @@ watch(() => imageData.sort, () => {
         v-for="item in imageData.list"
     >
       <ImageCard
+          :key="item.uid"
           :uid="item.uid"
           :url="item.cover"
           :star="item.thumbs_up"
@@ -60,7 +61,6 @@ watch(() => imageData.sort, () => {
         />
       </n-space>
     </div>
-
   </div>
 </template>
 

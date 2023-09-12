@@ -13,7 +13,11 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
         <n-space justify="center">
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-icon :size="18" class="icon" @click="toHome">
+              <n-icon
+                  :size="18"
+                  class="icon"
+                  @click="toHome"
+              >
                 <PaperPlaneSharp></PaperPlaneSharp>
               </n-icon>
             </template>
@@ -21,7 +25,11 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
           </n-tooltip>
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-icon :size="18" class="icon" @click="reload">
+              <n-icon
+                  :size="18"
+                  class="icon"
+                  @click="reload"
+              >
                 <ReloadCircleSharp></ReloadCircleSharp>
               </n-icon>
             </template>
@@ -29,19 +37,25 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
           </n-tooltip>
           <n-tooltip trigger="hover">
             <template #trigger>
-              <n-icon :size="18" class="icon" @click="exit">
+              <n-icon
+                  :size="18"
+                  class="icon"
+                  @click="exit"
+              >
                 <ExitSharp></ExitSharp>
               </n-icon>
             </template>
             退出应用
           </n-tooltip>
         </n-space>
-
         <span class="count">共{{ count }}张壁纸</span>
       </div>
       <div class="images">
         <div v-for="item in images">
-          <n-spin :show="item.isLoading">
+          <n-spin
+              :show="item.isLoading"
+              :key="item.uid"
+          >
             <n-image
                 :src="item.cover"
                 :width="335"
@@ -54,7 +68,10 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
             >
               <template #placeholder>
                 <div class="icon-wrapper">
-                  <n-icon :size="45" color="#fc5185">
+                  <n-icon
+                      :size="45"
+                      color="#fc5185"
+                  >
                     <PulseSharp></PulseSharp>
                   </n-icon>
                 </div>
@@ -68,7 +85,6 @@ const {count, images, isLoading, setWallpaper, exit, reload, toHome} = useTray()
       </div>
     </div>
   </n-spin>
-
 </template>
 
 <style scoped lang="less">
