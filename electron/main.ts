@@ -46,9 +46,10 @@ const createWindow = async () => {
         event.preventDefault()
     })
 
+
+
     app.on('activate', async () => {
         if (win) {
-            app.dock.bounce('critical')
             app.dock.show().then(() => {
                 win?.show()
             })
@@ -68,6 +69,9 @@ app.on('window-all-closed', () => {
     app.quit()
 })
 
+app.on('render-process-gone', () => {
+    app.relaunch()
+})
 
 
 

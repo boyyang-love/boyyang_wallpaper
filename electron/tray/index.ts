@@ -20,6 +20,12 @@ const createTray = () => {
                     win = w
                     win?.show()
                     isShow = true
+
+                    win.on('closed', () => {
+                        win?.removeAllListeners()
+                        win = null
+                        isShow = false
+                    })
                 })
             }
         } else {
@@ -27,6 +33,7 @@ const createTray = () => {
             isShow = false
         }
     })
+
 }
 
 const createTrayWin = async (bounds: Electron.Rectangle) => {
