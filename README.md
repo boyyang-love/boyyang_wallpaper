@@ -39,7 +39,7 @@ electron 简单易上手，所以花了几天时间简单的看了一下官方�
 
 由于接口比较少，所以为了不再重新搭建项目以及新建数据库等，所以我
 使用了个人博客项目的后端接口，有兴趣可以访问
-[GitHub地址](https://github.com/boyyang-love/boyyang_blog)
+[GitHub地址](https://github.com/boyyang-love/boyyang_blog_backend)
 或者
 [Gitee地址](https://gitee.com/boyyanglove/boyyang_blog_backend)
 
