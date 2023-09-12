@@ -1,11 +1,12 @@
 import {app, Tray, nativeImage, BrowserWindow} from 'electron'
 import {join} from 'path'
 
+
+let isShow = false
 const createTray = () => {
     const icon = nativeImage.createFromPath(join(__dirname, './icons/iconTemplate.png'))
     const tray = new Tray(icon)
 
-    let isShow = false
     let win: null | BrowserWindow = null
 
     tray.on('click', (_, bounds) => {
@@ -17,10 +18,8 @@ const createTray = () => {
             } else {
                 createTrayWin(bounds).then(w => {
                     win = w
-                    app.whenReady().then(() => {
-                        win?.show()
-                        isShow = true
-                    })
+                    win?.show()
+                    isShow = true
                 })
             }
         } else {
@@ -28,21 +27,7 @@ const createTray = () => {
             isShow = false
         }
     })
-
-    // tray.on('right-click', () => {
-    //     const contextMenu = Menu.buildFromTemplate([
-    //         {
-    //             label: '退出应用',
-    //             type: 'normal',
-    //             click: () => {
-    //                 app.quit()
-    //             },
-    //         },
-    //     ])
-    //     tray.setContextMenu(contextMenu)
-    // })
 }
-
 
 const createTrayWin = async (bounds: Electron.Rectangle) => {
     let width = 350
@@ -74,6 +59,16 @@ const createTrayWin = async (bounds: Electron.Rectangle) => {
     } else {
         await win.loadURL('http://localhost:3000/#/tray')
     }
+
+    win.on('blur', () => {
+        win.hide()
+        isShow = false
+    })
+
+    win.on('focus', () => {
+        win.show()
+        isShow = true
+    })
 
     return win
 }

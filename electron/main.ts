@@ -14,7 +14,7 @@ const createWindow = async () => {
         show: false,
         ...winState.winOptions,
         minWidth: 550,
-        minHeight: 750,
+        minHeight: 600,
         webPreferences: {
             nodeIntegration: true,
             preload: path.join(__dirname, './preload/index.js'), // 需要引用js文件
@@ -48,6 +48,7 @@ const createWindow = async () => {
 
     app.on('activate', async () => {
         if (win) {
+            app.dock.bounce('critical')
             app.dock.show().then(() => {
                 win?.show()
             })
