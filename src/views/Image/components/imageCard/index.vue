@@ -61,8 +61,6 @@ const iconClick = (item: IconsItem) => {
       </n-spin>
     </div>
   </div>
-
-
 </template>
 
 <style scoped lang="less">
@@ -70,11 +68,11 @@ const iconClick = (item: IconsItem) => {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  background-color: whitesmoke;
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
-  border: 7px solid whitesmoke;
+  border: 5px solid whitesmoke;
   position: relative;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
 
   .img {
     box-sizing: border-box;
@@ -95,7 +93,6 @@ const iconClick = (item: IconsItem) => {
     padding: 5px;
     border: 1px solid whitesmoke;
     overflow: hidden;
-
 
     .icon {
       box-sizing: border-box;
@@ -131,6 +128,5 @@ const iconClick = (item: IconsItem) => {
       }
     }
   }
-
 }
 </style>

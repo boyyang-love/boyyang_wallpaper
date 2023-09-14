@@ -5,6 +5,7 @@ import {useUserStore} from '@/store/modules/user'
 import {Search} from '@vicons/ionicons5'
 import {env} from '@/utils/env'
 import {useImage} from '@/views/Image/hooks/useImage'
+import {router} from '@/router'
 
 const {imageData, getList} = useImage()
 
@@ -14,6 +15,22 @@ const active = ref<number>(1)
 const userStore = useUserStore()
 
 const iconClick = (e: MenuItem) => {
+  if (e.id === 3) {
+    window.$dialog.create({
+      title: '提示',
+      content: '是否退出登录？',
+      negativeText: '取消',
+      positiveText: '退出',
+      onPositiveClick: () => {
+        window.localStorage.clear()
+        router.push({
+          path: '/login',
+        })
+      },
+    })
+
+    return
+  }
   active.value = e.id
   imageData.isLike = e.id === 2
   imageData.page = 1

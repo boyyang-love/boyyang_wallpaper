@@ -72,9 +72,9 @@ watch(() => imageData.sort, () => {
   overflow-y: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
+  grid-gap: 15px;
   justify-items: center;
-  padding-bottom: 45px;
+  padding: 0 10px 45px;
 
   .card-wrapper {
     width: 100%;

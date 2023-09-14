@@ -1,5 +1,5 @@
 import type {Component} from 'vue'
-import { Image, HeartHalf} from '@vicons/ionicons5'
+import { Image, HeartHalf, Exit} from '@vicons/ionicons5'
 
 export interface MenuItem {
     id: number
@@ -31,6 +31,15 @@ const useMenus = () => {
             size,
             position: 'top',
             path: '/image',
+        },
+        {
+            id: 3,
+            name: 'exit',
+            icon: Exit,
+            color: '#fff',
+            size,
+            position: 'top',
+            path: '/login',
         },
     ]
 
