@@ -75,11 +75,12 @@ const transForm: TransForm = {
         if (e?.response?.status === 401) {
             window.$notification.error({
                 title: '提示',
-                content: 'token 过期即将重新登录',
+                content: 'TOKEN已经过期',
                 duration: 2000,
             })
 
             window.sessionStorage.clear()
+            window.localStorage.clear()
             router.replace({name: 'Login'}).then(() => {
             })
         }
